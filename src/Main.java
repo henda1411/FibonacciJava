@@ -3,25 +3,20 @@ import java.util.List;
 
 public class Main {
     // Our limit
-    private final static int limit = 4000000;
-    private static List<Integer> fibSeq;
-
-    public Main() {
-
-    }
+    private final static int LIMIT = 4000000;
 
     // Method for iterative calculation of the Fibonacci seq.
-    public static void fib() {
-        // Init the array
-        fibSeq = new ArrayList();
+    public List<Integer> fib(int limit) {
+        List<Integer> fibSeq = new ArrayList();
         // Define var to store our terms (start from 1)
-        int first = 1, second = 2;
+        int first = 1;
+        int second = 2;
         fibSeq.add(first);
         fibSeq.add(second);
         for (int i = 1; ; i++) {
-            int savePrev1 = first;
+            int savePrevTerm = first;
             first = second;
-            second = savePrev1 + second;
+            second = savePrevTerm + second;
             // Condition from email
             if (second >= limit) {
                 break;
@@ -29,12 +24,13 @@ public class Main {
                 fibSeq.add(second);
             }
             // For testing
-            //System.out.println(fibSeq);
+//            System.out.println(fibSeq.size());
         }
+        return fibSeq;
     }
 
     // Method to count sum of the even-valued terms
-    public static int sumOfEven(List<Integer> sequences) {
+    public int sumOfEven(List<Integer> sequences) {
         int sum = 0;
         for (int i : sequences) {
             if (i % 2 == 0) {
@@ -45,9 +41,9 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        fib();
-        int sumOf = sumOfEven(fibSeq);
+        Main fibonaci = new Main();
+        List sequence = fibonaci.fib(LIMIT);
+        int sumOf = fibonaci.sumOfEven(sequence);
         System.out.println("Sum of the even numbers in sequence= " + sumOf);
-
     }
 }
